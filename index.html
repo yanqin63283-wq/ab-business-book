@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AB Business Book</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fb;
+  font-family: Arial, sans-serif;
+  color: #172033;
+}
+
+header {
+  background: #111827;
+  color: white;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 15px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 23px;
+}
+
+header p {
+  margin: 5px 0 0;
+  color: #cbd5e1;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.card {
+  background: white;
+  padding: 16px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px #00000010;
+}
+
+.card-title {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.card-value {
+  font-size: 21px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.primary {
+  background: #111827;
+  color: white;
+}
+
+.secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.panel {
+  background: white;
+  padding: 16px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 10px #00000010;
+}
+
+.panel h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d8dee8;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.record {
+  border: 1px solid #e5e7eb;
+  padding: 14px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.record-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profit {
+  font-weight: bold;
+}
+
+.info {
+  color: #64748b;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.small-button {
+  padding: 8px 10px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+.empty {
+  text-align: center;
+  padding: 25px;
+  color: #94a3b8;
+}
+
+@media (min-width: 700px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .buttons {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <h1>AB Business Book</h1>
+    <p>订单 · 收入 · 支出 · 盈利</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- 今日统计 -->
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-title">今日订单</div>
+      <div class="card-value" id="todayOrders">0</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">今日收入</div>
+      <div class="card-value" id="todayIncome">RM 0.00</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">今日支出</div>
+      <div class="card-value" id="todayExpense">RM 0.00</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">今日盈利</div>
+      <div class="card-value" id="todayProfit">RM 0.00</div>
+    </div>
+
+  </div>
+
+  <!-- 功能按钮 -->
+  <div class="buttons">
+
+    <button class="primary" onclick="openForm('order')">
+      ＋ 新增订单
+    </button>
+
+    <button class="primary" onclick="openForm('expense')">
+      ＋ 记录支出
+    </button>
+
+    <button class="secondary" onclick="showToday()">
+      📅 今日账单
+    </button>
+
+    <button class="secondary" onclick="showAll()">
+      📋 全部账单
+    </button>
+
+  </div>
+
+  <!-- 新增订单 -->
+  <div class="panel hidden" id="formPanel">
+
+    <h2 id="formTitle">新增订单</h2>
+
+    <div class="form-grid">
+
+      <div>
+        <label>日期</label>
+        <input type="date" id="date">
+      </div>
+
+      <div>
+        <label>类型</label>
+
+        <select id="type">
+          <option value="order">订单</option>
+          <option value="expense">支出</option>
+        </select>
+      </div>
+
+      <div>
+        <label>顾客 / 项目</label>
+        <input id="customer" placeholder="例如：Customer A">
+      </div>
+
+      <div>
+        <label>订单编号</label>
+        <input id="orderNo" placeholder="例如：A001">
+      </div>
+
+      <div>
+        <label>收入 / 收款 RM</label>
+        <input type="number" id="income" step="0.01" placeholder="0.00">
+      </div>
+
+      <div>
+        <label>成本 / 支出 RM</label>
+        <input type="number" id="expense" step="0.01" placeholder="0.00">
+      </div>
+
+      <div class="full">
+        <label>备注</label>
+        <input id="note" placeholder="例如：现金 / 转账 / 已收款">
+      </div>
+
+    </div>
+
+    <br>
+
+    <button class="primary" onclick="saveRecord()">
+      保存记录
+    </button>
+
+    <button class="secondary" onclick="closeForm()">
+      取消
+    </button>
+
+  </div>
+
+  <!-- 账单 -->
+  <div class="panel">
+
+    <h2>账单记录</h2>
+
+    <div id="records"></div>
+
+  </div>
+
+  <!-- 数据管理 -->
+  <div class="panel">
+
+    <h2>数据管理</h2>
+
+    <button class="secondary" onclick="exportCSV()">
+      📥 导出账单
+    </button>
+
+    <button class="danger" onclick="deleteAll()">
+      删除全部数据
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+
+let records =
+JSON.parse(localStorage.getItem("AB_BUSINESS_RECORDS") || "[]");
+
+let editId = null;
+
+function money(number) {
+
+  return "RM " +
+  Number(number || 0).toLocaleString(
+    "en-MY",
+    {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }
+  );
+
+}
+
+function today() {
+
+  return new Date().toISOString().slice(0,10);
+
+}
+
+function openForm(type) {
+
+  document
+  .getElementById("formPanel")
+  .classList.remove("hidden");
+
+  document
+  .getElementById("formTitle")
+  .innerText =
+  type === "expense"
+  ? "记录支出"
+  : "新增订单";
+
+  document.getElementById("date").value = today();
+
+  document.getElementById("type").value = type;
+
+  document.getElementById("customer").value = "";
+
+  document.getElementById("orderNo").value = "";
+
+  document.getElementById("income").value = "";
+
+  document.getElementById("expense").value = "";
+
+  document.getElementById("note").value = "";
+
+  editId = null;
+
+  document
+  .getElementById("formPanel")
+  .scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+function closeForm() {
+
+  document
+  .getElementById("formPanel")
+  .classList.add("hidden");
+
+  editId = null;
+
+}
+
+function saveRecord() {
+
+  let type =
+  document.getElementById("type").value;
+
+  let income =
+  Number(document.getElementById("income").value || 0);
+
+  let expense =
+  Number(document.getElementById("expense").value || 0);
+
+  if (type === "expense") {
+
+    income = 0;
+
+  }
+
+  let record = {
+
+    id:
+    editId ||
+    Date.now().toString(),
+
+    date:
+    document.getElementById("date").value ||
+    today(),
+
+    type: type,
+
+    customer:
+    document.getElementById("customer").value,
+
+    orderNo:
+    document.getElementById("orderNo").value,
+
+    income: income,
+
+    expense: expense,
+
+    note:
+    document.getElementById("note").value
+
+  };
+
+  if (
+    !record.customer &&
+    !record.orderNo &&
+    !record.note
+  ) {
+
+    alert("请填写顾客、订单编号或备注");
+
+    return;
+
+  }
+
+  if (editId) {
+
+    records =
+    records.map(function(item) {
+
+      return item.id === editId
+      ? record
+      : item;
+
+    });
+
+  } else {
+
+    records.unshift(record);
+
+  }
+
+  localStorage.setItem(
+    "AB_BUSINESS_RECORDS",
+    JSON.stringify(records)
+  );
+
+  closeForm();
+
+  render();
+
+}
+
+function editRecord(id) {
+
+  let record =
+  records.find(
+    item => item.id === id
+  );
+
+  if (!record) return;
+
+  document
+  .getElementById("formPanel")
+  .classList.remove("hidden");
+
+  document
+  .getElementById("formTitle")
+  .innerText =
+  "编辑记录";
+
+  document.getElementById("date").value =
+  record.date;
+
+  document.getElementById("type").value =
+  record.type;
+
+  document.getElementById("customer").value =
+  record.customer;
+
+  document.getElementById("orderNo").value =
+  record.orderNo;
+
+  document.getElementById("income").value =
+  record.income;
+
+  document.getElementById("expense").value =
+  record.expense;
+
+  document.getElementById("note").value =
+  record.note;
+
+  editId = id;
+
+  document
+  .getElementById("formPanel")
+  .scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+function deleteRecord(id) {
+
+  if (
+    !confirm("确定删除这笔记录吗？")
+  ) return;
+
+  records =
+  records.filter(
+    item => item.id !== id
+  );
+
+  localStorage.setItem(
+    "AB_BUSINESS_RECORDS",
+    JSON.stringify(records)
+  );
+
+  render();
+
+}
+
+function render(list = records) {
+
+  let date = today();
+
+  let todayRecords =
+  records.filter(
+    item => item.date === date
+  );
+
+  let income =
+  todayRecords.reduce(
+    (sum,item) =>
+    sum + Number(item.income || 0),
+    0
+  );
+
+  let expense =
+  todayRecords.reduce(
+    (sum,item) =>
+    sum + Number(item.expense || 0),
+    0
+  );
+
+  document.getElementById(
+    "todayOrders"
+  ).innerText =
+  todayRecords.filter(
+    item => item.type === "order"
+  ).length;
+
+  document.getElementById(
+    "todayIncome"
+  ).innerText =
+  money(income);
+
+  document.getElementById(
+    "todayExpense"
+  ).innerText =
+  money(expense);
+
+  document.getElementById(
+    "todayProfit"
+  ).innerText =
+  money(income - expense);
+
+  let container =
+  document.getElementById("records");
+
+  if (!list.length) {
+
+    container.innerHTML =
+    '<div class="empty">还没有账单记录</div>';
+
+    return;
+
+  }
+
+  container.innerHTML =
+  list.map(function(item) {
+
+    let profit =
+    Number(item.income || 0)
+    -
+    Number(item.expense || 0);
+
+    return `
+
+    <div class="record">
+
+      <div class="record-top">
+
+        <strong>
+          ${item.type === "order" ? "🧾" : "💸"}
+          ${item.customer || item.orderNo || "未命名"}
+        </strong>
+
+        <span class="profit">
+          ${money(profit)}
+        </span>
+
+      </div>
+
+      <div class="info">
+        日期：${item.date}
+      </div>
+
+      <div class="info">
+        订单：${item.orderNo || "-"}
+      </div>
+
+      <div class="info">
+        收入：${money(item.income)}
+        &nbsp;&nbsp;
+        支出：${money(item.expense)}
+      </div>
+
+      ${
+        item.note
+        ?
+        `<div class="info">
+          备注：${item.note}
+        </div>`
+        :
+        ""
+      }
+
+      <button
+        class="small-button secondary"
+        onclick="editRecord('${item.id}')"
+      >
+        编辑
+      </button>
+
+      <button
+        class="small-button danger"
+        onclick="deleteRecord('${item.id}')"
+      >
+        删除
+      </button>
+
+    </div>
+
+    `;
+
+  }).join("");
+
+}
+
+function showToday() {
+
+  let list =
+  records.filter(
+    item => item.date === today()
+  );
+
+  render(list);
+
+}
+
+function showAll() {
+
+  render(records);
+
+}
+
+function exportCSV() {
+
+  if (!records.length) {
+
+    alert("目前没有账单");
+
+    return;
+
+  }
+
+  let rows = [
+
+    [
+      "日期",
+      "类型",
+      "顾客/项目",
+      "订单编号",
+      "收入",
+      "支出",
+      "盈利",
+      "备注"
+    ]
+
+  ];
+
+  records.forEach(function(item) {
+
+    rows.push([
+
+      item.date,
+
+      item.type === "order"
+      ? "订单"
+      : "支出",
+
+      item.customer,
+
+      item.orderNo,
+
+      item.income,
+
+      item.expense,
+
+      Number(item.income)
+      -
+      Number(item.expense),
+
+      item.note
+
+    ]);
+
+  });
+
+  let csv =
+  "\ufeff" +
+  rows
+  .map(row =>
+    row.map(
+      value =>
+      `"${String(value).replace(/"/g,'""')}"`
+    ).join(",")
+  )
+  .join("\n");
+
+  let blob =
+  new Blob(
+    [csv],
+    {
+      type:
+      "text/csv;charset=utf-8;"
+    }
+  );
+
+  let url =
+  URL.createObjectURL(blob);
+
+  let a =
+  document.createElement("a");
+
+  a.href = url;
+
+  a.download =
+  "AB_Business_Book.csv";
+
+  a.click();
+
+  URL.revokeObjectURL(url);
+
+}
+
+function deleteAll() {
+
+  if (
+    !confirm(
+      "确定要删除全部账单吗？"
+    )
+  ) return;
+
+  records = [];
+
+  localStorage.setItem(
+    "AB_BUSINESS_RECORDS",
+    "[]"
+  );
+
+  render();
+
+}
+
+document.getElementById(
+  "date"
+).value = today();
+
+render();
+
+</script>
+
+</body>
+</html>

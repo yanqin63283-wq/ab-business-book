@@ -548,19 +548,21 @@ button{
       ＋ 新增支出
     </button>
 
-    <button
-      class="secondary"
-      onclick="showToday()"
-    >
-      📅 今天
-    </button>
+<button
+  class="secondary"
+  type="button"
+  id="todayButton"
+>
+  📅 今天
+</button>
 
-    <button
-      class="secondary"
-      onclick="showAll()"
-    >
-      📋 全部
-    </button>
+<button
+  class="secondary"
+  type="button"
+  id="allButton"
+>
+  📋 全部
+</button>
 
   </div>
 
@@ -2156,7 +2158,34 @@ supabaseClient.auth.onAuthStateChange(
   }
 
 })();
+document
+  .getElementById("todayButton")
+  .addEventListener("click", function(){
 
+    const today = getToday();
+
+    const result = records.filter(function(item){
+
+      if(!item.date){
+        return false;
+      }
+
+      return String(item.date).slice(0,10) === today;
+
+    });
+
+    render(result);
+
+  });
+
+
+document
+  .getElementById("allButton")
+  .addEventListener("click", function(){
+
+    render(records);
+
+  });
 </script>
 
 </body>

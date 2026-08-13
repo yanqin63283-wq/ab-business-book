@@ -157,8 +157,46 @@ label{
     <button class="primary" style="width:100%" onclick="login()">
       🔐 登录
     </button>
+    <button
+  class="secondary"
+  style="width:100%;margin-top:10px"
+  onclick="showForgotPassword()">
+  忘记密码？
+</button>
 
     <div id="loginMessage"></div>
+    <div id="forgotPanel" class="hidden" style="margin-top:20px">
+
+  <h2>重设密码</h2>
+
+  <p style="color:#64748b;font-size:14px">
+    输入你的 Email，我们会发送密码重设链接。
+  </p>
+
+  <input
+    id="resetEmail"
+    type="email"
+    placeholder="你的 Email">
+
+  <br><br>
+
+  <button
+    class="primary"
+    style="width:100%"
+    onclick="sendResetEmail()">
+    📧 发送重设邮件
+  </button>
+
+  <button
+    class="secondary"
+    style="width:100%;margin-top:10px"
+    onclick="hideForgotPassword()">
+    返回登录
+  </button>
+
+  <div id="resetMessage"></div>
+
+</div>
 
   </div>
 
@@ -1218,7 +1256,74 @@ supabaseClient.auth.onAuthStateChange(
   }
 );
 
-</script>
+function showForgotPassword(){
+
+  document
+    .getElementById("forgotPanel")
+    .classList.remove("hidden");
+
+}
+
+
+function hideForgotPassword(){
+
+  document
+    .getElementById("forgotPanel")
+    .classList.add("hidden");
+
+}
+
+
+async function sendResetEmail(){
+
+  const email =
+    document
+      .getElementById("resetEmail")
+      .value
+      .trim();
+
+  const message =
+    document
+      .getElementById("resetMessage");
+
+  if(!email){
+
+    message.innerHTML =
+      '<div class="error">请输入 Email</div>';
+
+    return;
+
+  }
+
+  const redirectUrl =
+    window.location.origin +
+    window.location.pathname;
+
+  const {error} =
+    await supabaseClient.auth.resetPasswordForEmail(
+      email,
+      {
+        redirectTo: redirectUrl
+      }
+    );
+
+  if(error){
+
+    message.innerHTML =
+      '<div class="error">' +
+      error.message +
+      '</div>';
+
+    return;
+
+  }
+
+  message.innerHTML =
+    '<div class="success">' +
+    '重设密码邮件已经发送，请检查你的 Email。' +
+    '</div>';
+
+}</script>
 
 </body>
 </html>

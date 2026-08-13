@@ -1237,6 +1237,59 @@ function escapeHTML(value){
 supabaseClient.auth.onAuthStateChange(
   async (event,session) => {
 
+    if(event === "PASSWORD_RECOVERY"){
+
+      const newPassword =
+        prompt("请输入新的密码：");
+
+      if(newPassword){
+
+        const {error} =
+          await supabaseClient.auth.updateUser({
+            password:newPassword
+          });
+
+        if(error){
+
+          alert(
+            "密码更新失败：" +
+            error.message
+          );
+
+        }else{
+
+          alert(
+            "密码已经成功更新！"
+          );
+
+          await logout();
+
+        }
+
+      }
+
+      return;
+    }
+
+    if(session){
+
+      await startApp();
+
+    }else{
+
+      document
+        .getElementById("app")
+        .classList.add("hidden");
+
+      document
+        .getElementById("loginPage")
+        .classList.remove("hidden");
+
+    }
+
+  }
+);
+
     if(session){
 
       await startApp();

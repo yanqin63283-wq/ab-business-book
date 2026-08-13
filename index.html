@@ -5,186 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AB Business Book</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#f5f7fb;
+  font-family:Arial,sans-serif;
+  color:#172033
 }
-
-body {
-  margin: 0;
-  background: #f5f7fb;
-  font-family: Arial, sans-serif;
-  color: #172033;
+header{
+  background:#111827;
+  color:white;
+  padding:20px
 }
-
-header {
-  background: #111827;
-  color: white;
-  padding: 20px;
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:15px
 }
-
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 15px;
+h1{margin:0;font-size:23px}
+h2{font-size:18px}
+header p{color:#cbd5e1}
+.card{
+  background:white;
+  padding:16px;
+  border-radius:15px;
+  box-shadow:0 2px 10px #0001;
+  margin-bottom:12px
 }
-
-header h1 {
-  margin: 0;
-  font-size: 23px;
+.cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
 }
-
-header p {
-  margin: 5px 0 0;
-  color: #cbd5e1;
+.card-title{
+  color:#64748b;
+  font-size:13px
 }
-
-.cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 15px;
+.card-value{
+  font-size:21px;
+  font-weight:bold;
+  margin-top:6px
 }
-
-.card {
-  background: white;
-  padding: 16px;
-  border-radius: 15px;
-  box-shadow: 0 2px 10px #00000010;
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:15px 0
 }
-
-.card-title {
-  color: #64748b;
-  font-size: 13px;
+button{
+  border:0;
+  border-radius:12px;
+  padding:13px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer
 }
-
-.card-value {
-  font-size: 21px;
-  font-weight: bold;
-  margin-top: 6px;
+.primary{background:#111827;color:white}
+.secondary{background:#e5e7eb;color:#111827}
+.danger{background:#fee2e2;color:#991b1b}
+input{
+  width:100%;
+  padding:12px;
+  border:1px solid #d8dee8;
+  border-radius:10px;
+  font-size:15px
 }
-
-.buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 15px;
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
 }
-
-button {
-  border: none;
-  border-radius: 12px;
-  padding: 13px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
+.full{grid-column:1/-1}
+label{
+  display:block;
+  color:#64748b;
+  font-size:13px;
+  margin-bottom:5px
 }
-
-.primary {
-  background: #111827;
-  color: white;
+.record{
+  border:1px solid #e5e7eb;
+  padding:14px;
+  border-radius:12px;
+  margin-top:10px
 }
-
-.secondary {
-  background: #e5e7eb;
-  color: #111827;
+.record-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px
 }
-
-.danger {
-  background: #fee2e2;
-  color: #991b1b;
+.info{
+  color:#64748b;
+  font-size:13px;
+  margin-top:5px
 }
-
-.panel {
-  background: white;
-  padding: 16px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 10px #00000010;
+.hidden{display:none}
+.empty{
+  text-align:center;
+  padding:25px;
+  color:#94a3b8
 }
-
-.panel h2 {
-  margin-top: 0;
-  font-size: 18px;
+.error{
+  color:#b91c1c;
+  background:#fee2e2;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px
 }
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+.success{
+  color:#166534;
+  background:#dcfce7;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px
 }
-
-.full {
-  grid-column: 1 / -1;
+.small{
+  padding:8px 10px;
+  font-size:12px;
+  margin-top:10px
 }
-
-label {
-  display: block;
-  color: #64748b;
-  font-size: 13px;
-  margin-bottom: 5px;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #d8dee8;
-  border-radius: 10px;
-  font-size: 15px;
-}
-
-.record {
-  border: 1px solid #e5e7eb;
-  padding: 14px;
-  border-radius: 12px;
-  margin-top: 10px;
-}
-
-.record-top {
-  display: flex;
-  justify-content: space-between;
-}
-
-.profit {
-  font-weight: bold;
-}
-
-.info {
-  color: #64748b;
-  font-size: 13px;
-  margin-top: 5px;
-}
-
-.small-button {
-  padding: 8px 10px;
-  margin-top: 10px;
-  font-size: 12px;
-}
-
-.hidden {
-  display: none;
-}
-
-.empty {
-  text-align: center;
-  padding: 25px;
-  color: #94a3b8;
-}
-
-@media (min-width: 700px) {
-  .cards {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .buttons {
-    grid-template-columns: repeat(4, 1fr);
-  }
+@media(min-width:700px){
+  .cards{grid-template-columns:repeat(4,1fr)}
+  .buttons{grid-template-columns:repeat(4,1fr)}
 }
 </style>
 </head>
 
 <body>
+
+<!-- LOGIN -->
+<div id="loginPage" class="container">
+
+  <div class="card" style="margin-top:50px">
+
+    <h1>AB Business Book</h1>
+
+    <p>登录你的生意账本</p>
+
+    <label>Email</label>
+    <input id="loginEmail" type="email" placeholder="你的 Email">
+
+    <br><br>
+
+    <label>Password</label>
+    <input id="loginPassword" type="password" placeholder="密码">
+
+    <br><br>
+
+    <button class="primary" style="width:100%" onclick="login()">
+      🔐 登录
+    </button>
+
+    <div id="loginMessage"></div>
+
+  </div>
+
+</div>
+
+
+<!-- MAIN APP -->
+<div id="app" class="hidden">
 
 <header>
   <div class="container">
@@ -195,7 +177,22 @@ select {
 
 <div class="container">
 
-  <!-- 今日统计 -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div class="card-title">登录账号</div>
+        <div id="userEmail"></div>
+      </div>
+
+      <button class="secondary small" onclick="logout()">
+        登出
+      </button>
+    </div>
+  </div>
+
+
+  <!-- DASHBOARD -->
+
   <div class="cards">
 
     <div class="card">
@@ -220,7 +217,9 @@ select {
 
   </div>
 
-  <!-- 功能按钮 -->
+
+  <!-- BUTTONS -->
+
   <div class="buttons">
 
     <button class="primary" onclick="openForm('order')">
@@ -241,8 +240,10 @@ select {
 
   </div>
 
-  <!-- 新增订单 -->
-  <div class="panel hidden" id="formPanel">
+
+  <!-- FORM -->
+
+  <div class="card hidden" id="formPanel">
 
     <h2 id="formTitle">新增订单</h2>
 
@@ -254,37 +255,28 @@ select {
       </div>
 
       <div>
-        <label>类型</label>
-
-        <select id="type">
-          <option value="order">订单</option>
-          <option value="expense">支出</option>
-        </select>
-      </div>
-
-      <div>
         <label>顾客 / 项目</label>
-        <input id="customer" placeholder="例如：Customer A">
+        <input id="customer" placeholder="例如 Customer A">
       </div>
 
       <div>
         <label>订单编号</label>
-        <input id="orderNo" placeholder="例如：A001">
+        <input id="orderNo" placeholder="例如 A001">
       </div>
 
       <div>
         <label>收入 / 收款 RM</label>
-        <input type="number" id="income" step="0.01" placeholder="0.00">
+        <input id="income" type="number" step="0.01" placeholder="0.00">
       </div>
 
       <div>
         <label>成本 / 支出 RM</label>
-        <input type="number" id="expense" step="0.01" placeholder="0.00">
+        <input id="expense" type="number" step="0.01" placeholder="0.00">
       </div>
 
       <div class="full">
         <label>备注</label>
-        <input id="note" placeholder="例如：现金 / 转账 / 已收款">
+        <input id="note" placeholder="现金 / 转账 / 已收款等">
       </div>
 
     </div>
@@ -299,408 +291,804 @@ select {
       取消
     </button>
 
-  </div>
-
-  <!-- 账单 -->
-  <div class="panel">
-
-    <h2>账单记录</h2>
-
-    <div id="records"></div>
+    <div id="formMessage"></div>
 
   </div>
 
-  <!-- 数据管理 -->
-  <div class="panel">
+
+  <!-- SEARCH -->
+
+  <div class="card">
+
+    <h2>🔎 搜索账单</h2>
+
+    <input
+      id="search"
+      placeholder="输入顾客或订单编号"
+      oninput="searchRecords()"
+    >
+
+  </div>
+
+
+  <!-- RECORDS -->
+
+  <div class="card">
+
+    <h2>🧾 账单记录</h2>
+
+    <div id="records">
+      <div class="empty">加载中...</div>
+    </div>
+
+  </div>
+
+
+  <!-- EXPORT -->
+
+  <div class="card">
 
     <h2>数据管理</h2>
 
     <button class="secondary" onclick="exportCSV()">
-      📥 导出账单
-    </button>
-
-    <button class="danger" onclick="deleteAll()">
-      删除全部数据
+      📥 导出 CSV
     </button>
 
   </div>
 
 </div>
 
+</div>
+
+
 <script>
 
-let records =
-JSON.parse(localStorage.getItem("AB_BUSINESS_RECORDS") || "[]");
+/* ================================
+   SUPABASE
+================================ */
 
-let editId = null;
+const SUPABASE_URL = "https://mcjrtpltfcaeejsomfeh.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_8PXzqZd-tRB2z07a-OKBAw_zkOoGXMO";
 
-function money(number) {
-
-  return "RM " +
-  Number(number || 0).toLocaleString(
-    "en-MY",
-    {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
   );
 
-}
 
-function today() {
+/* ================================
+   VARIABLES
+================================ */
 
-  return new Date().toISOString().slice(0,10);
+let records = [];
+let editId = null;
 
-}
 
-function openForm(type) {
+/* ================================
+   BASIC FUNCTIONS
+================================ */
 
-  document
-  .getElementById("formPanel")
-  .classList.remove("hidden");
+function today(){
 
-  document
-  .getElementById("formTitle")
-  .innerText =
-  type === "expense"
-  ? "记录支出"
-  : "新增订单";
+  const d = new Date();
 
-  document.getElementById("date").value = today();
-
-  document.getElementById("type").value = type;
-
-  document.getElementById("customer").value = "";
-
-  document.getElementById("orderNo").value = "";
-
-  document.getElementById("income").value = "";
-
-  document.getElementById("expense").value = "";
-
-  document.getElementById("note").value = "";
-
-  editId = null;
-
-  document
-  .getElementById("formPanel")
-  .scrollIntoView({
-    behavior:"smooth"
-  });
+  return d.toISOString().slice(0,10);
 
 }
 
-function closeForm() {
 
-  document
-  .getElementById("formPanel")
-  .classList.add("hidden");
+function money(value){
 
-  editId = null;
+  return "RM " +
+    Number(value || 0).toLocaleString(
+      "en-MY",
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      }
+    );
 
 }
 
-function saveRecord() {
 
-  let type =
-  document.getElementById("type").value;
+/* ================================
+   LOGIN
+================================ */
 
-  let income =
-  Number(document.getElementById("income").value || 0);
+async function login(){
 
-  let expense =
-  Number(document.getElementById("expense").value || 0);
+  const email =
+    document.getElementById("loginEmail").value.trim();
 
-  if (type === "expense") {
+  const password =
+    document.getElementById("loginPassword").value;
 
-    income = 0;
+  const message =
+    document.getElementById("loginMessage");
 
-  }
+  message.innerHTML = "";
 
-  let record = {
+  if(!email || !password){
 
-    id:
-    editId ||
-    Date.now().toString(),
-
-    date:
-    document.getElementById("date").value ||
-    today(),
-
-    type: type,
-
-    customer:
-    document.getElementById("customer").value,
-
-    orderNo:
-    document.getElementById("orderNo").value,
-
-    income: income,
-
-    expense: expense,
-
-    note:
-    document.getElementById("note").value
-
-  };
-
-  if (
-    !record.customer &&
-    !record.orderNo &&
-    !record.note
-  ) {
-
-    alert("请填写顾客、订单编号或备注");
+    message.innerHTML =
+      '<div class="error">请输入 Email 和 Password</div>';
 
     return;
 
   }
 
-  if (editId) {
-
-    records =
-    records.map(function(item) {
-
-      return item.id === editId
-      ? record
-      : item;
-
+  const {error} =
+    await supabaseClient.auth.signInWithPassword({
+      email,
+      password
     });
 
-  } else {
+  if(error){
 
-    records.unshift(record);
+    message.innerHTML =
+      '<div class="error">' +
+      error.message +
+      '</div>';
+
+    return;
 
   }
 
-  localStorage.setItem(
-    "AB_BUSINESS_RECORDS",
-    JSON.stringify(records)
-  );
-
-  closeForm();
-
-  render();
+  await startApp();
 
 }
 
-function editRecord(id) {
 
-  let record =
-  records.find(
-    item => item.id === id
-  );
+/* ================================
+   LOGOUT
+================================ */
 
-  if (!record) return;
+async function logout(){
 
-  document
-  .getElementById("formPanel")
-  .classList.remove("hidden");
+  await supabaseClient.auth.signOut();
 
   document
-  .getElementById("formTitle")
-  .innerText =
-  "编辑记录";
-
-  document.getElementById("date").value =
-  record.date;
-
-  document.getElementById("type").value =
-  record.type;
-
-  document.getElementById("customer").value =
-  record.customer;
-
-  document.getElementById("orderNo").value =
-  record.orderNo;
-
-  document.getElementById("income").value =
-  record.income;
-
-  document.getElementById("expense").value =
-  record.expense;
-
-  document.getElementById("note").value =
-  record.note;
-
-  editId = id;
+    .getElementById("app")
+    .classList.add("hidden");
 
   document
-  .getElementById("formPanel")
-  .scrollIntoView({
-    behavior:"smooth"
-  });
+    .getElementById("loginPage")
+    .classList.remove("hidden");
 
 }
 
-function deleteRecord(id) {
 
-  if (
-    !confirm("确定删除这笔记录吗？")
-  ) return;
+/* ================================
+   START APP
+================================ */
 
-  records =
-  records.filter(
-    item => item.id !== id
-  );
+async function startApp(){
 
-  localStorage.setItem(
-    "AB_BUSINESS_RECORDS",
-    JSON.stringify(records)
-  );
+  const {
+    data:{
+      user
+    }
+  } =
+    await supabaseClient.auth.getUser();
 
-  render();
+  if(!user){
+
+    document
+      .getElementById("app")
+      .classList.add("hidden");
+
+    document
+      .getElementById("loginPage")
+      .classList.remove("hidden");
+
+    return;
+
+  }
+
+  document
+    .getElementById("loginPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("app")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("userEmail")
+    .innerText = user.email;
+
+  document
+    .getElementById("date")
+    .value = today();
+
+  await loadRecords();
 
 }
 
-function render(list = records) {
 
-  let date = today();
+/* ================================
+   LOAD RECORDS
+================================ */
 
-  let todayRecords =
-  records.filter(
-    item => item.date === date
+async function loadRecords(){
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("orders")
+      .select("*")
+      .order("date", {ascending:false})
+      .order("created_at", {ascending:false});
+
+  if(error){
+
+    console.error(error);
+
+    document
+      .getElementById("records")
+      .innerHTML =
+      '<div class="error">' +
+      error.message +
+      '</div>';
+
+    return;
+
+  }
+
+  records = data || [];
+
+  render(records);
+
+}
+
+
+/* ================================
+   OPEN FORM
+================================ */
+
+function openForm(type){
+
+  editId = null;
+
+  document
+    .getElementById("formPanel")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("formTitle")
+    .innerText =
+      type === "expense"
+      ? "记录支出"
+      : "新增订单";
+
+  document
+    .getElementById("date")
+    .value = today();
+
+  document
+    .getElementById("customer")
+    .value = "";
+
+  document
+    .getElementById("orderNo")
+    .value = "";
+
+  document
+    .getElementById("income")
+    .value =
+      type === "expense"
+      ? "0"
+      : "";
+
+  document
+    .getElementById("expense")
+    .value = "";
+
+  document
+    .getElementById("note")
+    .value = "";
+
+  document
+    .getElementById("formMessage")
+    .innerHTML = "";
+
+  document
+    .getElementById("formPanel")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+function closeForm(){
+
+  document
+    .getElementById("formPanel")
+    .classList.add("hidden");
+
+  editId = null;
+
+}
+
+
+/* ================================
+   SAVE RECORD
+================================ */
+
+async function saveRecord(){
+
+  const {
+    data:{
+      user
+    }
+  } =
+    await supabaseClient.auth.getUser();
+
+  if(!user){
+
+    alert("请先登录");
+
+    return;
+
+  }
+
+  const date =
+    document.getElementById("date").value;
+
+  const customer =
+    document.getElementById("customer").value.trim();
+
+  const orderNo =
+    document.getElementById("orderNo").value.trim();
+
+  const income =
+    Number(
+      document.getElementById("income").value || 0
+    );
+
+  const expense =
+    Number(
+      document.getElementById("expense").value || 0
+    );
+
+  const note =
+    document.getElementById("note").value.trim();
+
+  const message =
+    document.getElementById("formMessage");
+
+  if(!date){
+
+    message.innerHTML =
+      '<div class="error">请选择日期</div>';
+
+    return;
+
+  }
+
+  if(!customer && !orderNo && !note){
+
+    message.innerHTML =
+      '<div class="error">请填写顾客、订单编号或备注</div>';
+
+    return;
+
+  }
+
+
+  /* EDIT */
+
+  if(editId){
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("orders")
+        .update({
+          date,
+          customer,
+          order_no:orderNo,
+          income,
+          expense,
+          note
+        })
+        .eq("id", editId)
+        .eq("user_id", user.id);
+
+    if(error){
+
+      message.innerHTML =
+        '<div class="error">' +
+        error.message +
+        '</div>';
+
+      return;
+
+    }
+
+  }
+
+  /* NEW */
+
+  else{
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("orders")
+        .insert({
+          user_id:user.id,
+          date,
+          type: income > 0 ? "order" : "expense",
+          customer,
+          order_no:orderNo,
+          income,
+          expense,
+          note
+        });
+
+    if(error){
+
+      message.innerHTML =
+        '<div class="error">' +
+        error.message +
+        '</div>';
+
+      return;
+
+    }
+
+  }
+
+  message.innerHTML =
+    '<div class="success">保存成功 ✓</div>';
+
+  editId = null;
+
+  await loadRecords();
+
+  setTimeout(
+    closeForm,
+    500
   );
 
-  let income =
-  todayRecords.reduce(
-    (sum,item) =>
-    sum + Number(item.income || 0),
-    0
-  );
+}
 
-  let expense =
-  todayRecords.reduce(
-    (sum,item) =>
-    sum + Number(item.expense || 0),
-    0
-  );
 
-  document.getElementById(
-    "todayOrders"
-  ).innerText =
-  todayRecords.filter(
-    item => item.type === "order"
-  ).length;
+/* ================================
+   EDIT
+================================ */
 
-  document.getElementById(
-    "todayIncome"
-  ).innerText =
-  money(income);
+function editRecord(id){
 
-  document.getElementById(
-    "todayExpense"
-  ).innerText =
-  money(expense);
+  const record =
+    records.find(
+      item => String(item.id) === String(id)
+    );
 
-  document.getElementById(
-    "todayProfit"
-  ).innerText =
-  money(income - expense);
+  if(!record) return;
 
-  let container =
-  document.getElementById("records");
+  editId = record.id;
 
-  if (!list.length) {
+  document
+    .getElementById("formPanel")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("formTitle")
+    .innerText = "编辑订单";
+
+  document
+    .getElementById("date")
+    .value = record.date;
+
+  document
+    .getElementById("customer")
+    .value = record.customer || "";
+
+  document
+    .getElementById("orderNo")
+    .value = record.order_no || "";
+
+  document
+    .getElementById("income")
+    .value = record.income || 0;
+
+  document
+    .getElementById("expense")
+    .value = record.expense || 0;
+
+  document
+    .getElementById("note")
+    .value = record.note || "";
+
+  document
+    .getElementById("formMessage")
+    .innerHTML = "";
+
+  document
+    .getElementById("formPanel")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* ================================
+   DELETE
+================================ */
+
+async function deleteRecord(id){
+
+  if(!confirm("确定删除这笔记录吗？")){
+
+    return;
+
+  }
+
+  const {
+    data:{
+      user
+    }
+  } =
+    await supabaseClient.auth.getUser();
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("orders")
+      .delete()
+      .eq("id",id)
+      .eq("user_id",user.id);
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+
+  }
+
+  await loadRecords();
+
+}
+
+
+/* ================================
+   RENDER
+================================ */
+
+function render(list){
+
+  const container =
+    document.getElementById("records");
+
+  if(!list.length){
 
     container.innerHTML =
-    '<div class="empty">还没有账单记录</div>';
+      '<div class="empty">目前没有账单记录</div>';
+
+    updateDashboard([]);
 
     return;
 
   }
 
   container.innerHTML =
-  list.map(function(item) {
+    list.map(item => {
 
-    let profit =
-    Number(item.income || 0)
-    -
-    Number(item.expense || 0);
+      const profit =
+        Number(item.income || 0)
+        -
+        Number(item.expense || 0);
 
-    return `
+      return `
 
-    <div class="record">
+        <div class="record">
 
-      <div class="record-top">
+          <div class="record-top">
 
-        <strong>
-          ${item.type === "order" ? "🧾" : "💸"}
-          ${item.customer || item.orderNo || "未命名"}
-        </strong>
+            <strong>
+              ${item.type === "expense" ? "💸" : "🧾"}
+              ${escapeHTML(
+                item.customer ||
+                item.order_no ||
+                "未命名"
+              )}
+            </strong>
 
-        <span class="profit">
-          ${money(profit)}
-        </span>
+            <strong>
+              ${money(profit)}
+            </strong>
 
-      </div>
+          </div>
 
-      <div class="info">
-        日期：${item.date}
-      </div>
+          <div class="info">
+            日期：${item.date}
+          </div>
 
-      <div class="info">
-        订单：${item.orderNo || "-"}
-      </div>
+          <div class="info">
+            订单编号：
+            ${escapeHTML(item.order_no || "-")}
+          </div>
 
-      <div class="info">
-        收入：${money(item.income)}
-        &nbsp;&nbsp;
-        支出：${money(item.expense)}
-      </div>
+          <div class="info">
+            收入：${money(item.income)}
+            &nbsp;&nbsp;
+            支出：${money(item.expense)}
+          </div>
 
-      ${
-        item.note
-        ?
-        `<div class="info">
-          备注：${item.note}
-        </div>`
-        :
-        ""
-      }
+          ${
+            item.note
+            ?
+            `<div class="info">
+              备注：${escapeHTML(item.note)}
+            </div>`
+            :
+            ""
+          }
 
-      <button
-        class="small-button secondary"
-        onclick="editRecord('${item.id}')"
-      >
-        编辑
-      </button>
+          <button
+            class="secondary small"
+            onclick="editRecord('${item.id}')"
+          >
+            ✏️ 编辑
+          </button>
 
-      <button
-        class="small-button danger"
-        onclick="deleteRecord('${item.id}')"
-      >
-        删除
-      </button>
+          <button
+            class="danger small"
+            onclick="deleteRecord('${item.id}')"
+          >
+            🗑️ 删除
+          </button>
 
-    </div>
+        </div>
 
-    `;
+      `;
 
-  }).join("");
+    }).join("");
+
+  updateDashboard(records);
 
 }
 
-function showToday() {
 
-  let list =
-  records.filter(
-    item => item.date === today()
-  );
+/* ================================
+   DASHBOARD
+================================ */
+
+function updateDashboard(list){
+
+  const todayRecords =
+    list.filter(
+      item => item.date === today()
+    );
+
+  const orders =
+    todayRecords.filter(
+      item => item.type === "order"
+    ).length;
+
+  const income =
+    todayRecords.reduce(
+      (sum,item) =>
+        sum + Number(item.income || 0),
+      0
+    );
+
+  const expense =
+    todayRecords.reduce(
+      (sum,item) =>
+        sum + Number(item.expense || 0),
+      0
+    );
+
+  document
+    .getElementById("todayOrders")
+    .innerText = orders;
+
+  document
+    .getElementById("todayIncome")
+    .innerText = money(income);
+
+  document
+    .getElementById("todayExpense")
+    .innerText = money(expense);
+
+  document
+    .getElementById("todayProfit")
+    .innerText =
+      money(income - expense);
+
+}
+
+
+/* ================================
+   TODAY
+================================ */
+
+function showToday(){
+
+  const list =
+    records.filter(
+      item => item.date === today()
+    );
 
   render(list);
 
 }
 
-function showAll() {
+
+/* ================================
+   ALL
+================================ */
+
+function showAll(){
 
   render(records);
 
 }
 
-function exportCSV() {
 
-  if (!records.length) {
+/* ================================
+   SEARCH
+================================ */
+
+function searchRecords(){
+
+  const keyword =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase()
+      .trim();
+
+  if(!keyword){
+
+    render(records);
+
+    return;
+
+  }
+
+  const result =
+    records.filter(item => {
+
+      const customer =
+        String(item.customer || "")
+          .toLowerCase();
+
+      const orderNo =
+        String(item.order_no || "")
+          .toLowerCase();
+
+      return (
+        customer.includes(keyword) ||
+        orderNo.includes(keyword)
+      );
+
+    });
+
+  render(result);
+
+}
+
+
+/* ================================
+   CSV EXPORT
+================================ */
+
+function exportCSV(){
+
+  if(!records.length){
 
     alert("目前没有账单");
 
@@ -713,7 +1101,7 @@ function exportCSV() {
     [
       "日期",
       "类型",
-      "顾客/项目",
+      "顾客",
       "订单编号",
       "收入",
       "支出",
@@ -723,64 +1111,63 @@ function exportCSV() {
 
   ];
 
-  records.forEach(function(item) {
+  records.forEach(item => {
 
     rows.push([
 
       item.date,
 
-      item.type === "order"
-      ? "订单"
-      : "支出",
+      item.type,
 
-      item.customer,
+      item.customer || "",
 
-      item.orderNo,
+      item.order_no || "",
 
-      item.income,
+      item.income || 0,
 
-      item.expense,
+      item.expense || 0,
 
-      Number(item.income)
+      Number(item.income || 0)
       -
-      Number(item.expense),
+      Number(item.expense || 0),
 
-      item.note
+      item.note || ""
 
     ]);
 
   });
 
-  let csv =
-  "\ufeff" +
-  rows
-  .map(row =>
-    row.map(
-      value =>
-      `"${String(value).replace(/"/g,'""')}"`
-    ).join(",")
-  )
-  .join("\n");
+  const csv =
+    "\ufeff" +
+    rows
+      .map(row =>
+        row
+          .map(value =>
+            `"${String(value)
+              .replace(/"/g,'""')}"`
+          )
+          .join(",")
+      )
+      .join("\n");
 
-  let blob =
-  new Blob(
-    [csv],
-    {
-      type:
-      "text/csv;charset=utf-8;"
-    }
-  );
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:"text/csv;charset=utf-8;"
+      }
+    );
 
-  let url =
-  URL.createObjectURL(blob);
+  const url =
+    URL.createObjectURL(blob);
 
-  let a =
-  document.createElement("a");
+  const a =
+    document.createElement("a");
 
   a.href = url;
 
   a.download =
-  "AB_Business_Book.csv";
+    "AB_Business_Book.csv";
 
   a.click();
 
@@ -788,30 +1175,48 @@ function exportCSV() {
 
 }
 
-function deleteAll() {
 
-  if (
-    !confirm(
-      "确定要删除全部账单吗？"
-    )
-  ) return;
+/* ================================
+   SECURITY
+================================ */
 
-  records = [];
+function escapeHTML(value){
 
-  localStorage.setItem(
-    "AB_BUSINESS_RECORDS",
-    "[]"
-  );
-
-  render();
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
-document.getElementById(
-  "date"
-).value = today();
 
-render();
+/* ================================
+   CHECK SESSION
+================================ */
+
+supabaseClient.auth.onAuthStateChange(
+  async (event,session) => {
+
+    if(session){
+
+      await startApp();
+
+    }else{
+
+      document
+        .getElementById("app")
+        .classList.add("hidden");
+
+      document
+        .getElementById("loginPage")
+        .classList.remove("hidden");
+
+    }
+
+  }
+);
 
 </script>
 

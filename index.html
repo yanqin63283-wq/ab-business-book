@@ -9,323 +9,699 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   background:#f5f7fb;
-  font-family:Arial,sans-serif;
-  color:#172033
+  color:#172033;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
+
+.container{
+  max-width:950px;
+  margin:auto;
+  padding:16px
+}
+
 header{
   background:#111827;
   color:white;
-  padding:20px
+  padding:22px 0
 }
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:15px
+
+header h1{
+  margin:0;
+  font-size:25px
 }
-h1{margin:0;font-size:23px}
-h2{font-size:18px}
-header p{color:#cbd5e1}
+
+header p{
+  margin:6px 0 0;
+  color:#cbd5e1
+}
+
 .card{
   background:white;
-  padding:16px;
-  border-radius:15px;
-  box-shadow:0 2px 10px #0001;
-  margin-bottom:12px
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:14px;
+  box-shadow:0 3px 15px rgba(0,0,0,.06)
 }
-.cards{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
+
+h2{
+  margin-top:0;
+  font-size:19px
 }
-.card-title{
+
+input,select{
+  width:100%;
+  padding:13px;
+  border:1px solid #d9dee8;
+  border-radius:10px;
+  font-size:15px;
+  background:white
+}
+
+label{
+  display:block;
+  font-size:13px;
   color:#64748b;
-  font-size:13px
+  margin-bottom:6px
 }
-.card-value{
-  font-size:21px;
-  font-weight:bold;
-  margin-top:6px
-}
-.buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin:15px 0
-}
+
 button{
   border:0;
-  border-radius:12px;
-  padding:13px;
+  border-radius:11px;
+  padding:13px 15px;
   font-size:15px;
-  font-weight:bold;
+  font-weight:600;
   cursor:pointer
 }
-.primary{background:#111827;color:white}
-.secondary{background:#e5e7eb;color:#111827}
-.danger{background:#fee2e2;color:#991b1b}
-input{
-  width:100%;
-  padding:12px;
-  border:1px solid #d8dee8;
-  border-radius:10px;
-  font-size:15px
+
+.primary{
+  background:#111827;
+  color:white
 }
+
+.secondary{
+  background:#e5e7eb;
+  color:#111827
+}
+
+.danger{
+  background:#fee2e2;
+  color:#991b1b
+}
+
+.full{
+  width:100%
+}
+
+.hidden{
+  display:none!important
+}
+
 .form-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
+  gap:13px
+}
+
+.full-column{
+  grid-column:1/-1
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
   gap:12px
 }
-.full{grid-column:1/-1}
-label{
-  display:block;
-  color:#64748b;
-  font-size:13px;
-  margin-bottom:5px
+
+.stat{
+  background:white;
+  padding:16px;
+  border-radius:15px;
+  box-shadow:0 3px 15px rgba(0,0,0,.05)
 }
+
+.stat-title{
+  color:#64748b;
+  font-size:13px
+}
+
+.stat-value{
+  font-size:21px;
+  font-weight:700;
+  margin-top:7px
+}
+
+.action-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px
+}
+
 .record{
   border:1px solid #e5e7eb;
+  border-radius:13px;
   padding:14px;
-  border-radius:12px;
   margin-top:10px
 }
-.record-top{
+
+.record-header{
   display:flex;
   justify-content:space-between;
   gap:10px
 }
-.info{
+
+.record-name{
+  font-weight:700
+}
+
+.profit{
+  font-weight:700
+}
+
+.record-info{
   color:#64748b;
   font-size:13px;
-  margin-top:5px
+  margin-top:6px
 }
-.hidden{display:none}
+
+.record-actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px
+}
+
+.small{
+  padding:8px 11px;
+  font-size:12px
+}
+
+.message{
+  margin-top:12px;
+  padding:11px;
+  border-radius:10px;
+  font-size:14px
+}
+
+.error{
+  background:#fee2e2;
+  color:#991b1b
+}
+
+.success{
+  background:#dcfce7;
+  color:#166534
+}
+
 .empty{
   text-align:center;
   padding:25px;
   color:#94a3b8
 }
-.error{
-  color:#b91c1c;
-  background:#fee2e2;
-  padding:10px;
-  border-radius:10px;
-  margin-top:10px
+
+.login-box{
+  max-width:430px;
+  margin:60px auto
 }
-.success{
-  color:#166534;
-  background:#dcfce7;
-  padding:10px;
-  border-radius:10px;
-  margin-top:10px
+
+.login-logo{
+  text-align:center;
+  margin-bottom:20px
 }
-.small{
-  padding:8px 10px;
-  font-size:12px;
-  margin-top:10px
+
+.tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:15px
 }
-@media(min-width:700px){
-  .cards{grid-template-columns:repeat(4,1fr)}
-  .buttons{grid-template-columns:repeat(4,1fr)}
+
+.tab{
+  flex:1
+}
+
+@media(max-width:700px){
+
+  .dashboard{
+    grid-template-columns:1fr 1fr
+  }
+
+  .action-grid{
+    grid-template-columns:1fr 1fr
+  }
+
+}
+
+@media(max-width:500px){
+
+  .form-grid{
+    grid-template-columns:1fr
+  }
+
+  .full-column{
+    grid-column:auto
+  }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- ================= LOGIN ================= -->
+
 <div id="loginPage" class="container">
 
-  <div class="card" style="margin-top:50px">
+  <div class="login-box">
 
-    <h1>AB Business Book</h1>
+    <div class="login-logo">
+      <h1>AB Business Book</h1>
+      <p>你的线上生意账本</p>
+    </div>
 
-    <p>登录你的生意账本</p>
+    <div class="card">
 
-    <label>Email</label>
-    <input id="loginEmail" type="email" placeholder="你的 Email">
+      <div id="loginForm">
 
-    <br><br>
+        <h2>🔐 登录</h2>
 
-    <label>Password</label>
-    <input id="loginPassword" type="password" placeholder="密码">
+        <label>Email</label>
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="输入你的 Email"
+        >
 
-    <br><br>
+        <br><br>
 
-    <button class="primary" style="width:100%" onclick="login()">
-      🔐 登录
-    </button>
-    <button
-  class="secondary"
-  style="width:100%;margin-top:10px"
-  onclick="showForgotPassword()">
-  忘记密码？
-</button>
+        <label>Password</label>
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="输入密码"
+        >
 
-    <div id="loginMessage"></div>
-    <div id="forgotPanel" class="hidden" style="margin-top:20px">
+        <br><br>
 
-  <h2>重设密码</h2>
+        <button
+          class="primary full"
+          onclick="login()"
+        >
+          登录
+        </button>
 
-  <p style="color:#64748b;font-size:14px">
-    输入你的 Email，我们会发送密码重设链接。
-  </p>
+        <button
+          class="secondary full"
+          style="margin-top:10px"
+          onclick="showForgot()"
+        >
+          忘记密码？
+        </button>
 
-  <input
-    id="resetEmail"
-    type="email"
-    placeholder="你的 Email">
+        <div id="loginMessage"></div>
 
-  <br><br>
+      </div>
 
-  <button
-    class="primary"
-    style="width:100%"
-    onclick="sendResetEmail()">
-    📧 发送重设邮件
-  </button>
 
-  <button
-    class="secondary"
-    style="width:100%;margin-top:10px"
-    onclick="hideForgotPassword()">
-    返回登录
-  </button>
+      <!-- FORGOT PASSWORD -->
 
-  <div id="resetMessage"></div>
+      <div id="forgotForm" class="hidden">
 
-</div>
+        <h2>🔑 忘记密码</h2>
+
+        <p style="color:#64748b;font-size:14px">
+          输入你的 Email，我们会发送密码重设链接。
+        </p>
+
+        <label>Email</label>
+
+        <input
+          id="forgotEmail"
+          type="email"
+          placeholder="输入你的 Email"
+        >
+
+        <br><br>
+
+        <button
+          class="primary full"
+          onclick="sendResetEmail()"
+        >
+          📧 发送重设邮件
+        </button>
+
+        <button
+          class="secondary full"
+          style="margin-top:10px"
+          onclick="showLogin()"
+        >
+          返回登录
+        </button>
+
+        <div id="forgotMessage"></div>
+
+      </div>
+
+    </div>
 
   </div>
 
 </div>
 
 
-<!-- MAIN APP -->
+<!-- ================= RESET PASSWORD ================= -->
+
+<div id="resetPage" class="container hidden">
+
+  <div class="login-box">
+
+    <div class="card">
+
+      <h2>🔐 设置新密码</h2>
+
+      <p style="color:#64748b;font-size:14px">
+        请设置一个新的登录密码。
+      </p>
+
+      <label>新密码</label>
+
+      <input
+        id="newPassword"
+        type="password"
+        placeholder="输入新密码"
+      >
+
+      <br><br>
+
+      <label>确认新密码</label>
+
+      <input
+        id="confirmPassword"
+        type="password"
+        placeholder="再次输入新密码"
+      >
+
+      <br><br>
+
+      <button
+        class="primary full"
+        onclick="updatePassword()"
+      >
+        更新密码
+      </button>
+
+      <div id="passwordMessage"></div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= MAIN APP ================= -->
+
 <div id="app" class="hidden">
 
 <header>
+
   <div class="container">
+
     <h1>AB Business Book</h1>
-    <p>订单 · 收入 · 支出 · 盈利</p>
+
+    <p>
+      订单 · 收入 · 支出 · 盈利
+    </p>
+
   </div>
+
 </header>
+
 
 <div class="container">
 
+  <!-- ACCOUNT -->
+
   <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center">
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    ">
+
       <div>
-        <div class="card-title">登录账号</div>
-        <div id="userEmail"></div>
+
+        <div style="
+          color:#64748b;
+          font-size:13px;
+        ">
+          当前账号
+        </div>
+
+        <strong id="userEmail"></strong>
+
       </div>
 
-      <button class="secondary small" onclick="logout()">
+      <button
+        class="secondary small"
+        onclick="logout()"
+      >
         登出
       </button>
+
     </div>
+
   </div>
 
 
   <!-- DASHBOARD -->
 
-  <div class="cards">
+  <div class="dashboard">
 
-    <div class="card">
-      <div class="card-title">今日订单</div>
-      <div class="card-value" id="todayOrders">0</div>
+    <div class="stat">
+
+      <div class="stat-title">
+        今日订单
+      </div>
+
+      <div
+        class="stat-value"
+        id="todayOrders"
+      >
+        0
+      </div>
+
     </div>
 
-    <div class="card">
-      <div class="card-title">今日收入</div>
-      <div class="card-value" id="todayIncome">RM 0.00</div>
+
+    <div class="stat">
+
+      <div class="stat-title">
+        今日收入
+      </div>
+
+      <div
+        class="stat-value"
+        id="todayIncome"
+      >
+        RM 0.00
+      </div>
+
     </div>
 
-    <div class="card">
-      <div class="card-title">今日支出</div>
-      <div class="card-value" id="todayExpense">RM 0.00</div>
+
+    <div class="stat">
+
+      <div class="stat-title">
+        今日支出
+      </div>
+
+      <div
+        class="stat-value"
+        id="todayExpense"
+      >
+        RM 0.00
+      </div>
+
     </div>
 
-    <div class="card">
-      <div class="card-title">今日盈利</div>
-      <div class="card-value" id="todayProfit">RM 0.00</div>
+
+    <div class="stat">
+
+      <div class="stat-title">
+        今日盈利
+      </div>
+
+      <div
+        class="stat-value"
+        id="todayProfit"
+      >
+        RM 0.00
+      </div>
+
     </div>
 
   </div>
 
 
-  <!-- BUTTONS -->
+  <br>
 
-  <div class="buttons">
 
-    <button class="primary" onclick="openForm('order')">
+  <!-- ACTIONS -->
+
+  <div class="action-grid">
+
+    <button
+      class="primary"
+      onclick="openForm('order')"
+    >
       ＋ 新增订单
     </button>
 
-    <button class="primary" onclick="openForm('expense')">
-      ＋ 记录支出
+    <button
+      class="primary"
+      onclick="openForm('expense')"
+    >
+      ＋ 新增支出
     </button>
 
-    <button class="secondary" onclick="showToday()">
-      📅 今日账单
+    <button
+      class="secondary"
+      onclick="showToday()"
+    >
+      📅 今天
     </button>
 
-    <button class="secondary" onclick="showAll()">
-      📋 全部账单
+    <button
+      class="secondary"
+      onclick="showAll()"
+    >
+      📋 全部
     </button>
 
   </div>
+
+
+  <br>
 
 
   <!-- FORM -->
 
-  <div class="card hidden" id="formPanel">
+  <div
+    id="formPanel"
+    class="card hidden"
+  >
 
-    <h2 id="formTitle">新增订单</h2>
+    <h2 id="formTitle">
+      新增订单
+    </h2>
 
     <div class="form-grid">
 
       <div>
+
         <label>日期</label>
-        <input type="date" id="date">
+
+        <input
+          id="date"
+          type="date"
+        >
+
       </div>
 
+
       <div>
+
         <label>顾客 / 项目</label>
-        <input id="customer" placeholder="例如 Customer A">
+
+        <input
+          id="customer"
+          placeholder="例如：Customer A"
+        >
+
       </div>
 
+
       <div>
+
         <label>订单编号</label>
-        <input id="orderNo" placeholder="例如 A001">
+
+        <input
+          id="orderNo"
+          placeholder="例如：A001"
+        >
+
       </div>
 
+
       <div>
+
         <label>收入 / 收款 RM</label>
-        <input id="income" type="number" step="0.01" placeholder="0.00">
+
+        <input
+          id="income"
+          type="number"
+          step="0.01"
+          placeholder="0.00"
+        >
+
       </div>
+
 
       <div>
+
         <label>成本 / 支出 RM</label>
-        <input id="expense" type="number" step="0.01" placeholder="0.00">
+
+        <input
+          id="expense"
+          type="number"
+          step="0.01"
+          placeholder="0.00"
+        >
+
       </div>
 
-      <div class="full">
+
+      <div>
+
+        <label>付款方式</label>
+
+        <select id="payment">
+
+          <option value="">
+            请选择
+          </option>
+
+          <option value="Cash">
+            Cash
+          </option>
+
+          <option value="Bank Transfer">
+            Bank Transfer
+          </option>
+
+          <option value="QR">
+            QR
+          </option>
+
+          <option value="Other">
+            Other
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="full-column">
+
         <label>备注</label>
-        <input id="note" placeholder="现金 / 转账 / 已收款等">
+
+        <input
+          id="note"
+          placeholder="例如：已收款 / 未收款"
+        >
+
       </div>
 
     </div>
 
     <br>
 
-    <button class="primary" onclick="saveRecord()">
-      保存记录
+    <button
+      class="primary"
+      onclick="saveRecord()"
+    >
+      💾 保存记录
     </button>
 
-    <button class="secondary" onclick="closeForm()">
+    <button
+      class="secondary"
+      onclick="closeForm()"
+    >
       取消
     </button>
 
@@ -342,7 +718,7 @@ label{
 
     <input
       id="search"
-      placeholder="输入顾客或订单编号"
+      placeholder="顾客 / 订单编号 / 备注"
       oninput="searchRecords()"
     >
 
@@ -356,7 +732,11 @@ label{
     <h2>🧾 账单记录</h2>
 
     <div id="records">
-      <div class="empty">加载中...</div>
+
+      <div class="empty">
+        加载中...
+      </div>
+
     </div>
 
   </div>
@@ -366,10 +746,13 @@ label{
 
   <div class="card">
 
-    <h2>数据管理</h2>
+    <h2>📥 数据</h2>
 
-    <button class="secondary" onclick="exportCSV()">
-      📥 导出 CSV
+    <button
+      class="secondary"
+      onclick="exportCSV()"
+    >
+      导出 CSV
     </button>
 
   </div>
@@ -381,12 +764,16 @@ label{
 
 <script>
 
-/* ================================
-   SUPABASE
-================================ */
+/* =====================================================
+   SUPABASE CONFIG
+===================================================== */
 
-const SUPABASE_URL = "https://mcjrtpltfcaeejsomfeh.supabase.co/rest/v1/";
-const SUPABASE_KEY = "sb_publishable_8PXzqZd-tRB2z07a-OKBAw_zkOoGXMO";
+const SUPABASE_URL =
+  "YOUR_SUPABASE_PROJECT_URL";
+
+const SUPABASE_KEY =
+  "YOUR_SUPABASE_PUBLISHABLE_KEY";
+
 
 const supabaseClient =
   window.supabase.createClient(
@@ -395,23 +782,37 @@ const supabaseClient =
   );
 
 
-/* ================================
+/* =====================================================
    VARIABLES
-================================ */
+===================================================== */
 
 let records = [];
+
 let editId = null;
 
 
-/* ================================
-   BASIC FUNCTIONS
-================================ */
+/* =====================================================
+   HELPERS
+===================================================== */
 
-function today(){
+function getToday(){
 
-  const d = new Date();
+  const now = new Date();
 
-  return d.toISOString().slice(0,10);
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(2,"0");
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(2,"0");
+
+  return `${year}-${month}-${day}`;
 
 }
 
@@ -430,64 +831,315 @@ function money(value){
 }
 
 
-/* ================================
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
    LOGIN
-================================ */
+===================================================== */
 
 async function login(){
 
   const email =
-    document.getElementById("loginEmail").value.trim();
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("loginPassword").value;
+    document
+      .getElementById("loginPassword")
+      .value;
 
   const message =
-    document.getElementById("loginMessage");
+    document
+      .getElementById("loginMessage");
 
   message.innerHTML = "";
 
   if(!email || !password){
 
     message.innerHTML =
-      '<div class="error">请输入 Email 和 Password</div>';
-
-    return;
-
-  }
-
-  const {error} =
-    await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
-
-  if(error){
-
-    message.innerHTML =
-      '<div class="error">' +
-      error.message +
+      '<div class="message error">' +
+      '请输入 Email 和 Password' +
       '</div>';
 
     return;
 
   }
 
-  await startApp();
+
+  const {
+    error
+  } =
+    await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+
+  if(error){
+
+    message.innerHTML =
+      '<div class="message error">' +
+      escapeHTML(error.message) +
+      '</div>';
+
+    return;
+
+  }
 
 }
 
 
-/* ================================
+/* =====================================================
+   FORGOT PASSWORD
+===================================================== */
+
+function showForgot(){
+
+  document
+    .getElementById("loginForm")
+    .classList.add("hidden");
+
+  document
+    .getElementById("forgotForm")
+    .classList.remove("hidden");
+
+}
+
+
+function showLogin(){
+
+  document
+    .getElementById("forgotForm")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginForm")
+    .classList.remove("hidden");
+
+}
+
+
+async function sendResetEmail(){
+
+  const email =
+    document
+      .getElementById("forgotEmail")
+      .value
+      .trim();
+
+  const message =
+    document
+      .getElementById("forgotMessage");
+
+  message.innerHTML = "";
+
+
+  if(!email){
+
+    message.innerHTML =
+      '<div class="message error">' +
+      '请输入 Email' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  /*
+    IMPORTANT:
+    This sends the user to the current website.
+    Supabase will return with a recovery session.
+  */
+
+  const redirectTo =
+    window.location.origin +
+    window.location.pathname;
+
+
+  const {
+    error
+  } =
+    await supabaseClient.auth.resetPasswordForEmail(
+      email,
+      {
+        redirectTo
+      }
+    );
+
+
+  if(error){
+
+    message.innerHTML =
+      '<div class="message error">' +
+      escapeHTML(error.message) +
+      '</div>';
+
+    return;
+
+  }
+
+
+  message.innerHTML =
+    '<div class="message success">' +
+    '重设密码邮件已经发送。请检查你的 Email。' +
+    '</div>';
+
+}
+
+
+/* =====================================================
+   RESET PASSWORD
+===================================================== */
+
+async function showResetPage(){
+
+  document
+    .getElementById("loginPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("app")
+    .classList.add("hidden");
+
+  document
+    .getElementById("resetPage")
+    .classList.remove("hidden");
+
+}
+
+
+async function updatePassword(){
+
+  const password =
+    document
+      .getElementById("newPassword")
+      .value;
+
+  const confirm =
+    document
+      .getElementById("confirmPassword")
+      .value;
+
+  const message =
+    document
+      .getElementById("passwordMessage");
+
+  message.innerHTML = "";
+
+
+  if(!password){
+
+    message.innerHTML =
+      '<div class="message error">' +
+      '请输入新密码' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  if(password.length < 6){
+
+    message.innerHTML =
+      '<div class="message error">' +
+      '密码至少需要 6 个字符' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  if(password !== confirm){
+
+    message.innerHTML =
+      '<div class="message error">' +
+      '两次密码不一样' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient.auth.updateUser({
+      password
+    });
+
+
+  if(error){
+
+    message.innerHTML =
+      '<div class="message error">' +
+      escapeHTML(error.message) +
+      '</div>';
+
+    return;
+
+  }
+
+
+  message.innerHTML =
+    '<div class="message success">' +
+    '密码更新成功！请使用新密码登录。' +
+    '</div>';
+
+
+  setTimeout(
+    async () => {
+
+      await supabaseClient.auth.signOut();
+
+      document
+        .getElementById("resetPage")
+        .classList.add("hidden");
+
+      document
+        .getElementById("loginPage")
+        .classList.remove("hidden");
+
+      showLogin();
+
+    },
+    1200
+  );
+
+}
+
+
+/* =====================================================
    LOGOUT
-================================ */
+===================================================== */
 
 async function logout(){
 
   await supabaseClient.auth.signOut();
 
+  records = [];
+
   document
     .getElementById("app")
+    .classList.add("hidden");
+
+  document
+    .getElementById("resetPage")
     .classList.add("hidden");
 
   document
@@ -497,9 +1149,9 @@ async function logout(){
 }
 
 
-/* ================================
+/* =====================================================
    START APP
-================================ */
+===================================================== */
 
 async function startApp(){
 
@@ -509,6 +1161,7 @@ async function startApp(){
     }
   } =
     await supabaseClient.auth.getUser();
+
 
   if(!user){
 
@@ -524,30 +1177,38 @@ async function startApp(){
 
   }
 
+
   document
     .getElementById("loginPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("resetPage")
     .classList.add("hidden");
 
   document
     .getElementById("app")
     .classList.remove("hidden");
 
+
   document
     .getElementById("userEmail")
     .innerText = user.email;
 
+
   document
     .getElementById("date")
-    .value = today();
+    .value = getToday();
+
 
   await loadRecords();
 
 }
 
 
-/* ================================
+/* =====================================================
    LOAD RECORDS
-================================ */
+===================================================== */
 
 async function loadRecords(){
 
@@ -558,23 +1219,33 @@ async function loadRecords(){
     await supabaseClient
       .from("orders")
       .select("*")
-      .order("date", {ascending:false})
-      .order("created_at", {ascending:false});
+      .order(
+        "date",
+        {
+          ascending:false
+        }
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
+
 
   if(error){
-
-    console.error(error);
 
     document
       .getElementById("records")
       .innerHTML =
-      '<div class="error">' +
-      error.message +
+      '<div class="message error">' +
+      escapeHTML(error.message) +
       '</div>';
 
     return;
 
   }
+
 
   records = data || [];
 
@@ -583,36 +1254,42 @@ async function loadRecords(){
 }
 
 
-/* ================================
-   OPEN FORM
-================================ */
+/* =====================================================
+   FORM
+===================================================== */
 
 function openForm(type){
 
   editId = null;
 
+
   document
     .getElementById("formPanel")
     .classList.remove("hidden");
+
 
   document
     .getElementById("formTitle")
     .innerText =
       type === "expense"
-      ? "记录支出"
+      ? "新增支出"
       : "新增订单";
+
 
   document
     .getElementById("date")
-    .value = today();
+    .value = getToday();
+
 
   document
     .getElementById("customer")
     .value = "";
 
+
   document
     .getElementById("orderNo")
     .value = "";
+
 
   document
     .getElementById("income")
@@ -621,17 +1298,26 @@ function openForm(type){
       ? "0"
       : "";
 
+
   document
     .getElementById("expense")
     .value = "";
+
+
+  document
+    .getElementById("payment")
+    .value = "";
+
 
   document
     .getElementById("note")
     .value = "";
 
+
   document
     .getElementById("formMessage")
     .innerHTML = "";
+
 
   document
     .getElementById("formPanel")
@@ -653,9 +1339,9 @@ function closeForm(){
 }
 
 
-/* ================================
+/* =====================================================
    SAVE RECORD
-================================ */
+===================================================== */
 
 async function saveRecord(){
 
@@ -666,189 +1352,263 @@ async function saveRecord(){
   } =
     await supabaseClient.auth.getUser();
 
+
   if(!user){
 
-    alert("请先登录");
+    alert("登录状态已经失效，请重新登录");
 
     return;
 
   }
 
+
   const date =
-    document.getElementById("date").value;
+    document
+      .getElementById("date")
+      .value;
+
 
   const customer =
-    document.getElementById("customer").value.trim();
+    document
+      .getElementById("customer")
+      .value
+      .trim();
+
 
   const orderNo =
-    document.getElementById("orderNo").value.trim();
+    document
+      .getElementById("orderNo")
+      .value
+      .trim();
+
 
   const income =
     Number(
-      document.getElementById("income").value || 0
+      document
+        .getElementById("income")
+        .value || 0
     );
+
 
   const expense =
     Number(
-      document.getElementById("expense").value || 0
+      document
+        .getElementById("expense")
+        .value || 0
     );
 
+
+  const payment =
+    document
+      .getElementById("payment")
+      .value;
+
+
   const note =
-    document.getElementById("note").value.trim();
+    document
+      .getElementById("note")
+      .value
+      .trim();
+
 
   const message =
-    document.getElementById("formMessage");
+    document
+      .getElementById("formMessage");
+
+
+  message.innerHTML = "";
+
 
   if(!date){
 
     message.innerHTML =
-      '<div class="error">请选择日期</div>';
+      '<div class="message error">' +
+      '请选择日期' +
+      '</div>';
 
     return;
 
   }
 
-  if(!customer && !orderNo && !note){
+
+  if(
+    income === 0 &&
+    expense === 0
+  ){
 
     message.innerHTML =
-      '<div class="error">请填写顾客、订单编号或备注</div>';
+      '<div class="message error">' +
+      '收入或支出至少填写一个金额' +
+      '</div>';
 
     return;
 
   }
+
+
+  const payload = {
+
+    date,
+
+    type:
+      income > 0
+      ? "order"
+      : "expense",
+
+    customer,
+
+    order_no:orderNo,
+
+    income,
+
+    expense,
+
+    note:
+      payment
+      ? `${payment}${note ? " · " + note : ""}`
+      : note
+
+  };
+
+
+  let result;
 
 
   /* EDIT */
 
   if(editId){
 
-    const {
-      error
-    } =
+    result =
       await supabaseClient
         .from("orders")
-        .update({
-          date,
-          customer,
-          order_no:orderNo,
-          income,
-          expense,
-          note
-        })
-        .eq("id", editId)
-        .eq("user_id", user.id);
-
-    if(error){
-
-      message.innerHTML =
-        '<div class="error">' +
-        error.message +
-        '</div>';
-
-      return;
-
-    }
+        .update(payload)
+        .eq("id",editId)
+        .eq("user_id",user.id);
 
   }
+
 
   /* NEW */
 
   else{
 
-    const {
-      error
-    } =
+    result =
       await supabaseClient
         .from("orders")
         .insert({
-          user_id:user.id,
-          date,
-          type: income > 0 ? "order" : "expense",
-          customer,
-          order_no:orderNo,
-          income,
-          expense,
-          note
+          ...payload,
+          user_id:user.id
         });
-
-    if(error){
-
-      message.innerHTML =
-        '<div class="error">' +
-        error.message +
-        '</div>';
-
-      return;
-
-    }
 
   }
 
-  message.innerHTML =
-    '<div class="success">保存成功 ✓</div>';
 
-  editId = null;
+  if(result.error){
+
+    message.innerHTML =
+      '<div class="message error">' +
+      escapeHTML(result.error.message) +
+      '</div>';
+
+    return;
+
+  }
+
+
+  message.innerHTML =
+    '<div class="message success">' +
+    '保存成功 ✓' +
+    '</div>';
+
 
   await loadRecords();
 
+
   setTimeout(
-    closeForm,
-    500
+    () => {
+
+      closeForm();
+
+    },
+    600
   );
 
 }
 
 
-/* ================================
+/* =====================================================
    EDIT
-================================ */
+===================================================== */
 
 function editRecord(id){
 
   const record =
     records.find(
-      item => String(item.id) === String(id)
+      item =>
+        String(item.id) === String(id)
     );
+
 
   if(!record) return;
 
+
   editId = record.id;
+
 
   document
     .getElementById("formPanel")
     .classList.remove("hidden");
 
+
   document
     .getElementById("formTitle")
-    .innerText = "编辑订单";
+    .innerText = "编辑记录";
+
 
   document
     .getElementById("date")
     .value = record.date;
 
+
   document
     .getElementById("customer")
-    .value = record.customer || "";
+    .value =
+      record.customer || "";
+
 
   document
     .getElementById("orderNo")
-    .value = record.order_no || "";
+    .value =
+      record.order_no || "";
+
 
   document
     .getElementById("income")
-    .value = record.income || 0;
+    .value =
+      record.income || 0;
+
 
   document
     .getElementById("expense")
-    .value = record.expense || 0;
+    .value =
+      record.expense || 0;
+
+
+  document
+    .getElementById("payment")
+    .value = "";
+
 
   document
     .getElementById("note")
-    .value = record.note || "";
+    .value =
+      record.note || "";
+
 
   document
     .getElementById("formMessage")
     .innerHTML = "";
+
 
   document
     .getElementById("formPanel")
@@ -859,17 +1619,20 @@ function editRecord(id){
 }
 
 
-/* ================================
+/* =====================================================
    DELETE
-================================ */
+===================================================== */
 
 async function deleteRecord(id){
 
-  if(!confirm("确定删除这笔记录吗？")){
+  const yes =
+    confirm(
+      "确定要删除这笔记录吗？"
+    );
 
-    return;
 
-  }
+  if(!yes) return;
+
 
   const {
     data:{
@@ -877,6 +1640,16 @@ async function deleteRecord(id){
     }
   } =
     await supabaseClient.auth.getUser();
+
+
+  if(!user){
+
+    alert("请重新登录");
+
+    return;
+
+  }
+
 
   const {
     error
@@ -887,6 +1660,7 @@ async function deleteRecord(id){
       .eq("id",id)
       .eq("user_id",user.id);
 
+
   if(error){
 
     alert(error.message);
@@ -895,24 +1669,29 @@ async function deleteRecord(id){
 
   }
 
+
   await loadRecords();
 
 }
 
 
-/* ================================
+/* =====================================================
    RENDER
-================================ */
+===================================================== */
 
 function render(list){
 
   const container =
-    document.getElementById("records");
+    document
+      .getElementById("records");
+
 
   if(!list.length){
 
     container.innerHTML =
-      '<div class="empty">目前没有账单记录</div>';
+      '<div class="empty">' +
+      '目前没有账单记录' +
+      '</div>';
 
     updateDashboard([]);
 
@@ -920,73 +1699,119 @@ function render(list){
 
   }
 
+
   container.innerHTML =
     list.map(item => {
 
-      const profit =
-        Number(item.income || 0)
-        -
+      const income =
+        Number(item.income || 0);
+
+      const expense =
         Number(item.expense || 0);
+
+      const profit =
+        income - expense;
+
+
+      const type =
+        item.type === "expense"
+        ? "💸"
+        : "🧾";
+
 
       return `
 
         <div class="record">
 
-          <div class="record-top">
+          <div class="record-header">
 
-            <strong>
-              ${item.type === "expense" ? "💸" : "🧾"}
-              ${escapeHTML(
-                item.customer ||
-                item.order_no ||
-                "未命名"
-              )}
-            </strong>
+            <div>
 
-            <strong>
+              <div class="record-name">
+
+                ${type}
+
+                ${escapeHTML(
+                  item.customer ||
+                  item.order_no ||
+                  "未命名"
+                )}
+
+              </div>
+
+              <div class="record-info">
+
+                日期：${escapeHTML(item.date)}
+
+              </div>
+
+            </div>
+
+
+            <div class="profit">
+
               ${money(profit)}
-            </strong>
+
+            </div>
 
           </div>
 
-          <div class="info">
-            日期：${item.date}
-          </div>
 
-          <div class="info">
+          <div class="record-info">
+
             订单编号：
-            ${escapeHTML(item.order_no || "-")}
+            ${escapeHTML(
+              item.order_no || "-"
+            )}
+
           </div>
 
-          <div class="info">
-            收入：${money(item.income)}
+
+          <div class="record-info">
+
+            收入：
+            ${money(income)}
+
             &nbsp;&nbsp;
-            支出：${money(item.expense)}
+
+            支出：
+            ${money(expense)}
+
           </div>
+
 
           ${
             item.note
             ?
-            `<div class="info">
-              备注：${escapeHTML(item.note)}
-            </div>`
+            `
+            <div class="record-info">
+              备注：
+              ${escapeHTML(item.note)}
+            </div>
+            `
             :
             ""
           }
 
-          <button
-            class="secondary small"
-            onclick="editRecord('${item.id}')"
-          >
-            ✏️ 编辑
-          </button>
 
-          <button
-            class="danger small"
-            onclick="deleteRecord('${item.id}')"
-          >
-            🗑️ 删除
-          </button>
+          <div class="record-actions">
+
+            <button
+              class="secondary small"
+              onclick="editRecord('${item.id}')"
+            >
+              ✏️ 编辑
+            </button>
+
+
+            <button
+              class="danger small"
+              onclick="deleteRecord('${item.id}')"
+            >
+              🗑️ 删除
+            </button>
+
+          </div>
 
         </div>
 
@@ -994,80 +1819,97 @@ function render(list){
 
     }).join("");
 
+
   updateDashboard(records);
 
 }
 
 
-/* ================================
+/* =====================================================
    DASHBOARD
-================================ */
+===================================================== */
 
 function updateDashboard(list){
 
+  const today =
+    getToday();
+
+
   const todayRecords =
     list.filter(
-      item => item.date === today()
+      item =>
+        item.date === today
     );
+
 
   const orders =
     todayRecords.filter(
-      item => item.type === "order"
+      item =>
+        item.type === "order"
     ).length;
+
 
   const income =
     todayRecords.reduce(
       (sum,item) =>
-        sum + Number(item.income || 0),
+        sum +
+        Number(item.income || 0),
       0
     );
+
 
   const expense =
     todayRecords.reduce(
       (sum,item) =>
-        sum + Number(item.expense || 0),
+        sum +
+        Number(item.expense || 0),
       0
     );
+
 
   document
     .getElementById("todayOrders")
     .innerText = orders;
 
+
   document
     .getElementById("todayIncome")
-    .innerText = money(income);
+    .innerText =
+      money(income);
+
 
   document
     .getElementById("todayExpense")
-    .innerText = money(expense);
+    .innerText =
+      money(expense);
+
 
   document
     .getElementById("todayProfit")
     .innerText =
-      money(income - expense);
+      money(
+        income - expense
+      );
 
 }
 
 
-/* ================================
-   TODAY
-================================ */
+/* =====================================================
+   FILTERS
+===================================================== */
 
 function showToday(){
 
-  const list =
+  const result =
     records.filter(
-      item => item.date === today()
+      item =>
+        item.date === getToday()
     );
 
-  render(list);
+  render(result);
 
 }
 
-
-/* ================================
-   ALL
-================================ */
 
 function showAll(){
 
@@ -1075,10 +1917,6 @@ function showAll(){
 
 }
 
-
-/* ================================
-   SEARCH
-================================ */
 
 function searchRecords(){
 
@@ -1089,6 +1927,7 @@ function searchRecords(){
       .toLowerCase()
       .trim();
 
+
   if(!keyword){
 
     render(records);
@@ -1097,32 +1936,34 @@ function searchRecords(){
 
   }
 
+
   const result =
     records.filter(item => {
 
-      const customer =
-        String(item.customer || "")
-          .toLowerCase();
+      const text = (
 
-      const orderNo =
-        String(item.order_no || "")
-          .toLowerCase();
+        String(item.customer || "") +
+        " " +
+        String(item.order_no || "") +
+        " " +
+        String(item.note || "")
 
-      return (
-        customer.includes(keyword) ||
-        orderNo.includes(keyword)
-      );
+      ).toLowerCase();
+
+
+      return text.includes(keyword);
 
     });
+
 
   render(result);
 
 }
 
 
-/* ================================
-   CSV EXPORT
-================================ */
+/* =====================================================
+   CSV
+===================================================== */
 
 function exportCSV(){
 
@@ -1134,7 +1975,8 @@ function exportCSV(){
 
   }
 
-  let rows = [
+
+  const rows = [
 
     [
       "日期",
@@ -1149,7 +1991,15 @@ function exportCSV(){
 
   ];
 
+
   records.forEach(item => {
+
+    const income =
+      Number(item.income || 0);
+
+    const expense =
+      Number(item.expense || 0);
+
 
     rows.push([
 
@@ -1161,19 +2011,18 @@ function exportCSV(){
 
       item.order_no || "",
 
-      item.income || 0,
+      income,
 
-      item.expense || 0,
+      expense,
 
-      Number(item.income || 0)
-      -
-      Number(item.expense || 0),
+      income - expense,
 
       item.note || ""
 
     ]);
 
   });
+
 
   const csv =
     "\ufeff" +
@@ -1188,97 +2037,82 @@ function exportCSV(){
       )
       .join("\n");
 
+
   const blob =
     new Blob(
       [csv],
       {
-        type:"text/csv;charset=utf-8;"
+        type:
+          "text/csv;charset=utf-8;"
       }
     );
+
 
   const url =
     URL.createObjectURL(blob);
 
+
   const a =
     document.createElement("a");
+
 
   a.href = url;
 
   a.download =
     "AB_Business_Book.csv";
 
+
+  document
+    .body
+    .appendChild(a);
+
+
   a.click();
+
+  a.remove();
+
 
   URL.revokeObjectURL(url);
 
 }
 
 
-/* ================================
-   SECURITY
-================================ */
-
-function escapeHTML(value){
-
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* ================================
-   CHECK SESSION
-================================ */
+/* =====================================================
+   AUTH STATE
+===================================================== */
 
 supabaseClient.auth.onAuthStateChange(
   async (event,session) => {
 
+    /*
+      When user clicks the password
+      recovery email, Supabase creates
+      a recovery session.
+    */
+
     if(event === "PASSWORD_RECOVERY"){
 
-      const newPassword =
-        prompt("请输入新的密码：");
-
-      if(newPassword){
-
-        const {error} =
-          await supabaseClient.auth.updateUser({
-            password:newPassword
-          });
-
-        if(error){
-
-          alert(
-            "密码更新失败：" +
-            error.message
-          );
-
-        }else{
-
-          alert(
-            "密码已经成功更新！"
-          );
-
-          await logout();
-
-        }
-
-      }
+      await showResetPage();
 
       return;
+
     }
+
 
     if(session){
 
       await startApp();
 
-    }else{
+    }
+
+    else{
 
       document
         .getElementById("app")
+        .classList.add("hidden");
+
+      document
+        .getElementById("resetPage")
         .classList.add("hidden");
 
       document
@@ -1290,93 +2124,36 @@ supabaseClient.auth.onAuthStateChange(
   }
 );
 
-    if(session){
 
-      await startApp();
+/* =====================================================
+   INITIAL CHECK
+===================================================== */
 
-    }else{
+(async function(){
 
-      document
-        .getElementById("app")
-        .classList.add("hidden");
-
-      document
-        .getElementById("loginPage")
-        .classList.remove("hidden");
-
+  const {
+    data:{
+      session
     }
-
-  }
-);
-
-function showForgotPassword(){
-
-  document
-    .getElementById("forgotPanel")
-    .classList.remove("hidden");
-
-}
+  } =
+    await supabaseClient.auth.getSession();
 
 
-function hideForgotPassword(){
+  /*
+    If user opened the page from
+    password recovery link, Supabase
+    will have a recovery session.
+  */
 
-  document
-    .getElementById("forgotPanel")
-    .classList.add("hidden");
+  if(session){
 
-}
-
-
-async function sendResetEmail(){
-
-  const email =
-    document
-      .getElementById("resetEmail")
-      .value
-      .trim();
-
-  const message =
-    document
-      .getElementById("resetMessage");
-
-  if(!email){
-
-    message.innerHTML =
-      '<div class="error">请输入 Email</div>';
-
-    return;
+    await startApp();
 
   }
 
-  const redirectUrl =
-    window.location.origin +
-    window.location.pathname;
+})();
 
-  const {error} =
-    await supabaseClient.auth.resetPasswordForEmail(
-      email,
-      {
-        redirectTo: redirectUrl
-      }
-    );
-
-  if(error){
-
-    message.innerHTML =
-      '<div class="error">' +
-      error.message +
-      '</div>';
-
-    return;
-
-  }
-
-  message.innerHTML =
-    '<div class="success">' +
-    '重设密码邮件已经发送，请检查你的 Email。' +
-    '</div>';
-
-}</script>
+</script>
 
 </body>
 </html>

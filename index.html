@@ -1900,11 +1900,15 @@ function updateDashboard(list){
 
 function showToday(){
 
-  const result =
-    records.filter(
-      item =>
-        item.date === getToday()
-    );
+  const today = getToday();
+
+  const result = records.filter(item => {
+
+    if(!item.date) return false;
+
+    return String(item.date).substring(0,10) === today;
+
+  });
 
   render(result);
 
